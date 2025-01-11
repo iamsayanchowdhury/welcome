@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sayan Chowdhury</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <style>
+        /* Hero Section Styles */
+        .hero-wrapper {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000000 !important;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1500px; /* Increased from 1400px */
+            width: 100%;
+            padding: 4rem;
+            display: flex;
+            align-items: flex-start;  /* Changed from center */
+            justify-content: flex-start;  /* Changed from center */
+        }
+
+        /* Transformation Text Styles */
+        .transformation-text {
+            font-size: 120px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-left: 2rem;  /* Added margin from left */
+        }
+
+        .text-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            white-space: nowrap;
+            overflow: visible;
+            padding-right: 15px; /* Add padding to prevent cutoff */
+        }
+
+        .text-name {
+            font-size: 80px;
+            background: linear-gradient(45deg, #fff, #00a8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            padding-right: 5px; /* Add padding for italic text */
+        }
+
+        .text-data {
+            background: linear-gradient(45deg, #00a8ff, #005dc0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            padding-right: 5px; /* Add padding for italic text */
+        }
+
+        .text-decisions {
+            background: linear-gradient(45deg, #005dc0, #00ff95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            padding-right: 5px; /* Add padding for italic text */
+        }
+
+        .text-main {
+            font-size: 60px;
+            color: rgb(255, 255, 255);
+            font-weight: 700;
+            opacity: 0.2 !important;
+        }
+
+        /* Video Background Styles */
+        .hero-background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        /* Chat Interface Styles */
+        .chat-wrapper {
+            min-height: 600px;
+            max-height: 80vh;
+            margin: 2rem auto;
+        }
+
+        .chat-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .chat-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 8px;
+            resize: none;
+            outline: none;
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Message Content Styles */
+        .message-content {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .message-content code {
+            background: #2d2d2d;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .message-content pre {
+            background: #1e1e1e !important;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00a8ff, #005dc0);
+            border-radius: 5px;
+            border: 2px solid #000000;
+        }
+
+        /* Marquee Styles */
+        .marquee-content {
+            padding: 1rem 0;
+        }
+
+        .marquee-container marquee {
+            color: #000;
+            font-weight: 700;
+            display: block;
+        }
+
+        .marquee-container img {
+            vertical-align: middle;
+            margin: 0 10px;
+        }
+
+        /* Missing Sections Note */
+        .missing-sections-note {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .missing-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8) !important;
+        }
+
+        .sparkle-text {
+            color: #00a8ff;
+            position: relative;
+            animation: glow 2s ease-in-out infinite;
+            font-weight: 600;
+            padding: 0 10px;
+        }
+
+        /* Animations */
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #00a8ff, 0 0 20px #00a8ff, 0 0 30px #00a8ff; }
+            50% { text-shadow: 0 0 15px #00a8ff, 0 0 25px #00a8ff, 0 0 35px #00a8ff; }
+        }
+
+        /* Update responsive styles */
+        @media (max-width: 768px) {
+            .hero-container {
+                padding: 2rem;
+            }
+            
+            .transformation-text {
+                font-size: 80px;
+                margin-left: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .transformation-text {
+                font-size: 60px;
+                margin-left: 0.5rem;
+            }
+        }
+
+        /* Add/update these styles */
+
+        /* Chat Suggestion Chips */
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .chat-suggestion-chip {
+            background: rgba(0, 168, 255, 0.1);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            color: #00a8ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+            white-space: nowrap;
+        }
+
+        .chat-suggestion-chip:hover {
+            background: rgba(0, 168, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 168, 255, 0.15);
+        }
+
+        /* Voice Input Button */
+        .voice-input-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 168, 255, 0.1);
+            color: #00a8ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .voice-input-btn:hover {
+            background: rgba(0, 168, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .voice-input-btn.recording {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff4444;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .voice-input-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); 
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .chat-suggestions {
+                gap: 8px;
+            }
+
+            .chat-suggestion-chip {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Update the AI message content style */
+        .ai-message .message-content {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-family: inherit; /* Changed from monospace to inherit */
+            line-height: 1.6;
+            white-space: pre-wrap;
+            padding: 1.2rem;
+        }
+
+        /* Update code blocks to use monospace only for code */
+        .message-content code,
+        .message-content pre {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .version-tag {
+            font-size: 0.8rem;
+            color: #00a8ff;
+            background: rgba(0, 168, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        /* Hero Section Social Links */
+        .hero-social-links {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 2;
+        }
+
+        .hero-social-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 168, 255, 0.1);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00a8ff;
+            transition: all 0.3s ease;
+        }
+
+        .hero-social-icon:hover {
+            background: rgba(0, 168, 255, 0.2);
+            transform: translateX(-5px);
+            box-shadow: 0 0 20px rgba(0, 168, 255, 0.2);
+        }
+
+        .hero-social-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-social-links {
+                right: 1rem;
+                gap: 1rem;
+            }
+
+            .hero-social-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .hero-social-icon svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .transformation-text {
+                font-size: 60px;
+                margin-left: 1rem;
+            }
+
+            .text-name {
+                font-size: 50px;
+            }
+
+            .text-main {
+                font-size: 40px;
+            }
+
+            .chat-wrapper {
+                margin: 1rem;
+                height: calc(100vh - 2rem);
+            }
+
+            .chat-suggestion-chip {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .marquee-container img {
+                height: 40px;
+            }
+
+            .chat-input-wrapper {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-social-links {
+                right: 0.5rem;
+            }
+
+            .hero-social-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .transformation-text {
+                font-size: 40px;
+                margin-left: 0.5rem;
+            }
+
+            .text-name {
+                font-size: 35px;
+            }
+
+            .text-main {
+                font-size: 30px;
+            }
+        }
+
+        .transformation-text .text-row {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+    </style>
+</head>
+<body class="bg-dark">
+    <main>
+        <div class="hero-wrapper">
+            <video autoplay muted loop id="heroVideo" class="hero-background-video">
+                <source src="static/bg.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <!-- Update the hero container content -->
+            <div class="hero-container">
+                <div class="transformation-text">
+                    <div class="text-row">
+                        <span class="text-name" style="font-style: italic;">Hi, I am Sayan</span>
+                    </div>
+                    <div class="text-row">
+                        <span class="text-main" style="font-style: italic;">I TRANSFORM</span>
+                    </div>
+                    <div class="text-row">
+                        <span class="text-data" style="font-style: italic;">DATA</span>
+                    </div>
+                    <div class="text-row">
+                        <span class="text-main" style="font-style: italic;">INTO</span>
+                    </div>
+                    <div class="text-row">
+                        <span class="text-decisions" style="font-style: italic;">DECISIONS</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add this new section for social links -->
+            <div class="hero-social-links">
+                <a href="mailto:iamsayanchowdhury2000@gmail.com" class="hero-social-icon" title="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <path d="M22 6l-10 7L2 6"/>
+                    </svg>
+                </a>
+                <a href="tel:+916290499207" class="hero-social-icon" title="Call">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/iamsayanchowdhury" target="_blank" class="hero-social-icon" title="GitHub">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-4 0C9.27.65 8.09 1 8.09 1a5.07 5.07 0 0 0-.09 3.77A5.44 5.44 0 0 0 6 9.52c0 5.46 3.3 6.65 6.44 7a3.37 3.37 0 0 0-.94 2.61V22"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/sayanchowdhury" target="_blank" class="hero-social-icon" title="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Replace the existing marquee section with this: -->
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <marquee behavior="scroll" direction="left" scrollamount="12">
+                   <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    PYTHON <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    SQL <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    BIG DATA <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    MACHINE LEARNING <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    DATA PIPELINE ARCHITECTURE <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    CONNECT WITH AI BELOW <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();">
+                  
+                 
+                    PYTHON <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    SQL <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    BIG DATA <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    MACHINE LEARNING <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    DATA PIPELINE ARCHITECTURE <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();"> 
+                    CONNECT WITH AI BELOW <img src="/sparkle.png" alt="" style="height: 80px;filter: invert();">
+                </marquee>
+            </div>
+        </div>
+
+        <section id="ai-chat" class="container-fluid">
+            <div class="chat-wrapper">
+                <div id="chat-container-particles"></div>
+                <div class="chat-background"></div>
+                <div class="chat-particles" id="chat-particles"></div>
+                <div class="chat-content">
+                    <div class="chat-header">
+                        <div class="d-flex align-items-center justify-content-between w-100">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="ai-avatar">
+                                    <svg class="ai-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8 8 8-3.59 8-8-3.59-8-8-8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" />
+                                        <circle cx="12" cy="12" r="2" fill="white">
+                                            <animate 
+                                                attributeName="r"
+                                                values="2;3;2"
+                                                dur="2s"
+                                                repeatCount="indefinite"
+                                            />
+                                        </circle>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2 class="mb-0">SIMA AI <span class="version-tag">v2.5 beta</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chatOutput">
+                        <div class="message ai-message">
+                            <div class="message-content">
+                                <p style="margin-bottom: 8px;">Hello! I'm SIMA AI, Sayan's digital assistant. Here are some things you can ask me about:</p>
+                                <div class="chat-suggestions" style="margin-top: 8px;">
+                                    <button class="chat-suggestion-chip" data-question="What is Sayan's professional experience?">💼 Experience</button>
+                                    <button class="chat-suggestion-chip" data-question="What is the tech stack of Sayan?">🛠️ Tech Stack</button>
+                                    <button class="chat-suggestion-chip" data-question="What are Sayan's achievements?">🏆 Achievements</button>
+                                    <button class="chat-suggestion-chip" data-question="Can you tell me about Sayan's projects?">🚀 Projects</button>
+                                    <button class="chat-suggestion-chip" data-question="What are Sayan's data science skills?">📊 Data Skills</button>
+                                    <button class="chat-suggestion-chip" data-question="Tell me about Sayan's innovative work">💡 Innovation</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Update the chat input wrapper HTML structure -->
+                    <div class="chat-input-wrapper">
+                        <div class="input-container">
+                            <textarea 
+                                id="userInput" 
+                                class="chat-input" 
+                                placeholder="Ask Sima anything..."
+                                rows="1"
+                            ></textarea>
+                            <div class="typing-border"></div>
+                        </div>
+                        <button class="voice-input-btn" title="Voice Input">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 18.5V23"/>
+                                <path d="M8 23h8"/>
+                            </svg>
+                        </button>
+                        <button id="actionButton" class="action-button" disabled>
+                            <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg class="stop-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="6" y="6" width="12" height="12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+          
+        <div class="missing-sections-note">
+    <p class="missing-text">
+        <strong>Missing About, Skills, or Achievement sections?</strong> Just ask SIMA AI about them!
+        <br>
+        <span class="sparkle-text" style="font-style: italic;">  She knows everything about me </span>
+    </p>
+</div>
+        </section>
+
+        <!-- Replace the playground link section with this simpler version -->
+        <div class="playground-link-section">
+            <a href="https://sayanchowdhury.vercel.app" target="_blank" class="playground-link">Want more of SIMA AI? Try now at Playground →</a>
+        </div>
+
+        <footer>
+
+
+<style>
+    .playground-link-section {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .playground-link {
+        color: #00a8ff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+
+    .playground-link:hover {
+        opacity: 1;
+        color: #00a8ff;
+    }
+</style>
+
+        <!-- Find the footer section and replace it with this -->
+<footer>
+    <p>Made with <span class="heart">❤️</span> and Passion by Sayan Chowdhury</p>
+</footer>
+
+<!-- Add this style for the heart animation if not already present -->
+<style>
+    footer {
+        padding: 1rem;
+        text-align: center;
+        background: var(--dark-gray);
+        margin-top: 0;
+    }
+
+    footer p {
+        color: rgba(255,255,255,0.8);
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    .heart {
+        display: inline-block;
+        animation: heartBeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+</style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Add these helper functions at the start of your script
+    function parseMarkdown(text) {
+        // Single star for bullet points (must be at start of line)
+        text = text.replace(/^\*\s+(.+)$/gm, '<li>$1</li>');
+        text = text.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+        
+        // Bold (double stars)
+        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        
+        // Italic
+        text = text.replace(/_(.*?)_/g, '<em>$1</em>');
+        
+        // Code blocks with language support
+        text = text.replace(/```(\w+)?\n(.*?)```/gs, (match, lang, code) => {
+            const language = lang || 'plaintext';
+            const highlighted = Prism.highlight(
+                code.trim(),
+                Prism.languages[language] || Prism.languages.plaintext,
+                language
+            );
+            return `<pre class="language-${language}"><code class="language-${language}">${highlighted}</code></pre>`;
+        });
+        
+        // Inline code
+        text = text.replace(/`(.*?)`/g, '<code class="language-plaintext">$1</code>');
+        
+        // Line breaks
+        text = text.replace(/\n/g, '<br>');
+        
+        return text;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatOutput = document.getElementById('chatOutput');
+        const userInput = document.getElementById('userInput');
+        const actionButton = document.getElementById('actionButton');
+        const sendIcon = actionButton.querySelector('.send-icon');
+        const stopIcon = actionButton.querySelector('.stop-icon');
+        let isTyping = false;
+        let shouldStopTyping = false;
+
+        const toggleActionButton = (typing) => {
+            actionButton.classList.toggle('stop-mode', typing);
+            actionButton.disabled = false; // Always keep button enabled during typing
+            if (!typing) {
+                // Only disable if there's no text when returning to send mode
+                actionButton.disabled = !userInput.value.trim();
+            }
+        };
+
+        const createTypingIndicator = () => {
+            const div = document.createElement('div');
+            div.className = 'message ai-message';
+            div.innerHTML = `
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            return div;
+        };
+
+        const typeText = async (element, text, isHtml = false) => {
+            if (!isHtml) {
+                return typeTextSimple(element, text);
+            }
+
+            element.innerHTML = '';
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = text;
+            const nodes = Array.from(tempDiv.childNodes);
+            isTyping = true;
+            shouldStopTyping = false;
+            toggleActionButton(true);
+
+            try {
+                for (let node of nodes) {
+                    if (shouldStopTyping) break;
+                    
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        await typeTextSimple(element, node.textContent);
+                    } else {
+                        const clone = node.cloneNode(true);
+                        element.appendChild(clone);
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                    }
+                }
+            } finally {
+                if (shouldStopTyping) {
+                    element.innerHTML = text;
+                }
+                isTyping = false;
+                toggleActionButton(false);
+            }
+        };
+
+        const typeTextSimple = async (element, text) => {
+            const words = text.split(' ');
+            let currentGroup = [];
+            let charCount = 0;
+            const CHARS_PER_GROUP = 24; // Increased for faster typing
+            
+            for (let word of words) {
+                if (charCount + word.length > CHARS_PER_GROUP) {
+                    if (shouldStopTyping) break;
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    span.textContent = currentGroup.join(' ') + ' ';
+                    element.appendChild(span);
+                    await new Promise(resolve => setTimeout(resolve, 30)); // Reduced delay
+                    
+                    currentGroup = [word];
+                    charCount = word.length;
+                } else {
+                    currentGroup.push(word);
+                    charCount += word.length + 1;
+                }
+            }
+            
+            if (currentGroup.length > 0 && !shouldStopTyping) {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.textContent = currentGroup.join(' ');
+                element.appendChild(span);
+            }
+        };
+
+        const addMessage = async (text, isAi = false) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isAi ? 'ai-message' : 'user-message'} message-fade-in`;
+            const contentDiv = document.createElement('div');
+            contentDiv.className = `message-content ${isAi ? 'ai-text-typing' : ''}`;
+            messageDiv.appendChild(contentDiv);
+            
+            if (!isAi) {
+                contentDiv.textContent = text;
+            }
+            
+            chatOutput.appendChild(messageDiv);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+
+            if (isAi) {
+                const formattedText = parseMarkdown(text);
+                await typeText(contentDiv, formattedText, true);
+            }
+        };
+
+        const handleSend = async () => {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, false);
+            userInput.value = '';
+            actionButton.disabled = true;
+
+            const typingIndicator = createTypingIndicator();
+            chatOutput.appendChild(typingIndicator);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+
+            try {
+                const response = await fetch('https://sayanchowdhuryapp.vercel.app/api/ask-ai', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: text }),
+                });
+
+                const data = await response.json();
+                typingIndicator.remove();
+                await addMessage(data.answer, true);
+            } catch (error) {
+                typingIndicator.remove();
+                await addMessage('Sorry, I encountered an error. Please try again.', true);
+            }
+        };
+
+        userInput.addEventListener('input', (e) => {
+            actionButton.disabled = !e.target.value.trim();
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+        });
+
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+            }
+        });
+
+        actionButton.addEventListener('click', () => {
+            if (isTyping) {
+                shouldStopTyping = true;
+            } else {
+                handleSend();
+            }
+        });
+
+        // Update this section for chat suggestions
+        document.querySelectorAll('.chat-suggestion-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const question = chip.getAttribute('data-question');
+                userInput.value = question;
+                handleSend();
+            });
+        });
+
+        particlesJS('chat-container-particles', {
+            particles: {
+                number: {
+                    value: 60,
+                    density: { enable: true, value_area: 800 }
+                },
+                color: { value: '#0066ff' },
+                shape: {
+                    type: 'circle',
+                },
+                opacity: {
+                    value: 0.15,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.05,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#0066ff',
+                    opacity: 0.1,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'bounce',
+                    bounce: true,
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: { opacity: 0.3 }
+                    },
+                    push: { particles_nb: 3 }
+                }
+            },
+            retina_detect: true
+        });
+    });
+    </script>
+
+    <script>
+        const canvas = document.getElementById("circuitCanvas");
+        const ctx = canvas.getContext("2d");
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Fill with pure black initially
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        let particles = [];
+
+        function Clear() {
+            // Almost completely opaque black for darker trails
+            ctx.fillStyle = "rgba(0, 0, 0, 0.95)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        class Particle {
+            constructor(x, y, speed) {
+                this.x = x;
+                this.y = y;
+                this.speed = speed;
+            }
+
+            update() {
+                ctx.strokeStyle = "#00a8ff"; // Bright blue
+                ctx.lineWidth = 1;
+                ctx.lineCap = "round";
+                ctx.shadowColor = "#00a8ff";
+                ctx.shadowBlur = 10;
+
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                this.x += this.speed.x;
+                this.y += this.speed.y;
+                ctx.lineTo(this.x, this.y);
+                ctx.stroke();
+
+                // Rest of update code remains same...
+            }
+        }
+
+        // Rest of the code remains same...
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Initial call to fill background
+
+        pulse();
+        animate();
+    </script>
+
+    <style>
+        /* Add/update these styles */
+        body, html {
+            background-color: #000000 !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        #circuitCanvas {
+            background-color: #000000 !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+
+    <style>
+        .message-content code {
+            background: #2d2d2d;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .message-content pre {
+            background: #2d2d2d;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .message-content strong {
+            color: #00a8ff;
+            font-weight: 600;
+        }
+
+        .message-content em {
+            color: #00ff95;
+            font-style: italic;
+        }
+
+        .message-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .message-content li {
+            margin: 5px 0;
+        }
+
+        .message-content {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .message-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+            list-style-type: none;
+        }
+
+        .message-content li {
+            position: relative;
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .message-content li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #00a8ff;
+        }
+
+        .message-content pre {
+            margin: 15px 0;
+            border-radius: 8px;
+            background: #1e1e1e !important;
+        }
+
+        .message-content code {
+            font-family: 'Fira Code', monospace;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+
+        .message-content code.language-plaintext {
+            background: #2d2d2d;
+            color: #e6e6e6;
+        }
+
+        .token.comment { color: #6c8998; }
+        .token.keyword { color: #569CD6; }
+        .token.string { color: #CE9178; }
+        .token.function { color: #DCDCAA; }
+        .token.number { color: #B5CEA8; }
+
+        /* Override Prism.js default styles */
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: transparent !important;
+            text-shadow: none !important;
+            line-height: 1.6 !important;
+        }
+
+        .message-content pre {
+            background: #1e1e1e !important;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .message-content code {
+            font-family: 'Fira Code', monospace;
+            border-radius: 4px;
+            padding: 2px 6px;
+            background: #1e1e1e !important;
+            color: #e6e6e6;
+        }
+
+        .message-content pre code {
+            padding: 0;
+            background: transparent !important;
+        }
+
+        /* Code syntax highlighting colors */
+        .token.comment { color: #6c8998; }
+        .token.keyword { color: #569CD6; }
+        .token.string { color: #CE9178; }
+        .token.function { color: #DCDCAA; }
+        .token.number { color: #B5CEA8; }
+        .token.operator { color: #D4D4D4; }
+        .token.punctuation { color: #D4D4D4; }
+    </style>
+    <script>
+    // Voice Input Handler
+    const voiceBtn = document.querySelector('.voice-input-btn');
+    let isRecording = false;
+
+    voiceBtn.addEventListener('click', () => {
+        if (!isRecording) {
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.onstart = () => {
+                    isRecording = true;
+                    voiceBtn.classList.add('recording');
+                };
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    userInput.value = transcript;
+                    userInput.dispatchEvent(new Event('input'));
+                };
+
+                recognition.onend = () => {
+                    isRecording = false;
+                    voiceBtn.classList.remove('recording');
+                };
+
+                recognition.start();
+            }
+        }
+    });
+
+    // Character Counter
+    userInput.addEventListener('input', (e) => {
+        const count = e.target.value.length;
+        document.querySelector('.input-stats').textContent = `${count}/280`;
+        if (count > 280) {
+            e.target.value = e.target.value.slice(0, 280);
+        }
+    });
+
+    // Quick Response Chips
+    document.querySelectorAll('.quick-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            userInput.value = chip.textContent;
+            userInput.dispatchEvent(new Event('input'));
+            handleSend();
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tl = gsap.timeline({
+            defaults: {
+                ease: "power4.out",
+                duration: 1
+            }
+        });
+
+        // Stagger fade in animation for each text row
+        tl.fromTo(".transformation-text .text-row", 
+            { 
+                y: 20, 
+                opacity: 0 
+            },
+            { 
+                y: 0, 
+                opacity: 1,
+                stagger: 0.3, // 0.3 second delay between each text row
+                duration: 1.2,
+                ease: "power3.out"
+            }
+        );
+
+        // Add a subtle floating animation to "DATA" after it appears
+        tl.to(".text-data", {
+            y: "-=10",
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut"
+        }, ">");
+
+        // Add a gentle glow pulse to "DECISIONS"
+        tl.to(".text-decisions", {
+            filter: "brightness(1.2)",
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "none"
+        }, ">");
+    });
+</script>
+</body>
+</html>
