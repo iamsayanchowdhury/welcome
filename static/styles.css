@@ -13,7 +13,7 @@
 
 @font-face {
     font-family: 'RavensaraSans';
-    src: url('static/RavensaraSans-Regular.ttf') format('truetype');
+    src: url('RavensaraSans-Regular.ttf') format('truetype');
 }
 
 * {
